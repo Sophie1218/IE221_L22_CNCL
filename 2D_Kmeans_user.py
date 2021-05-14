@@ -161,7 +161,7 @@ while running:
                 print("run pressed")
 
             # Random button
-            if 850 < mouse_x < 1000 and 250 < mouse_y < 300:
+            if 850 < mouse_x < 999999 and 250 < mouse_y < 300:
                 labels = []
                 clusters = []
                 for i in range(K):
