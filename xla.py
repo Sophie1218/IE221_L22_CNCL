@@ -5,10 +5,10 @@ import numpy
 img = plt.imread("a.jpg")
 print(img.shape)
 
-width = img.shape[0]
-height = img.shape[1]
+w = img.shape[0]
+h = img.shape[1]
 
-img = img.reshape(width*height,3)
+img = img.reshape(w*h,3)
 
 print(img.shape)
 
@@ -26,7 +26,7 @@ print(img2)
 for i in range(len(img2)):
 	img2[i] = clusters[labels[i]]
 
-img2 = img2.reshape(width,height,3)
+img2 = img2.reshape(w,h,3)
 
 plt.imshow(img2)
 plt.show()
