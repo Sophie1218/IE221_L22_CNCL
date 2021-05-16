@@ -18,7 +18,7 @@ labels = kmeans.predict(img)
 clusters = kmeans.cluster_centers_
 
 print(labels)
-print(clusters)
+print(clusters) 
 
 img2 = numpy.zeros_like(img)
 print(img2)
