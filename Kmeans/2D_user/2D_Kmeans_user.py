@@ -1,6 +1,3 @@
-# def create_text_render(string):
-#     font = pygame.font.SysFont('sans', 40)
-#     return font.render(string, True, WHITE)
 import pygame
 from random import randint
 import math
@@ -17,8 +14,8 @@ screen = pygame.display.set_mode((1200, 700))
 
 # Caption and Icon
 pygame.display.set_caption('K - means Visualization')
-icon = pygame.image.load('../../visual-thinking.png')
-pygame.display.set_icon(icon)
+# icon = pygame.image.load('visual-thinking.png')
+# pygame.display.set_icon(icon)
 
 running = True
 
@@ -33,13 +30,25 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (147, 153, 35)
-PURPLE = (255, 0, 255)
+PINK = (255, 0, 255)
 SKY = (0, 255, 255)
 ORANGE = (255, 125, 25)
-GRAPE = (100, 25, 125)
 GRASS = (55, 155, 65)
+GREY = (38, 50, 56)
 
-COLORS = [RED, GREEN, BLUE, YELLOW, PURPLE, SKY, ORANGE, GRAPE, GRASS]
+LIGHT_RED = (255, 230, 230)
+LIGHT_GREEN = (233, 255, 230)
+LIGHT_BLUE = (230, 230, 255)
+LIGHT_YELLOW = (255, 253, 235)
+LIGHT_PINK = (255, 250, 250)
+LIGHT_SKY = (230, 255, 255)
+LIGHT_ORANGE = (255, 242, 235)
+LIGHT_GRASS = (240, 244, 195)
+LIGHT_GREY = (236, 239, 241)
+
+COLORS = [RED, GREEN, BLUE, YELLOW, PINK, SKY, ORANGE, GRASS, GREY]
+LIGHT_COLORS = [LIGHT_RED, LIGHT_GREEN, LIGHT_BLUE, LIGHT_YELLOW, LIGHT_PINK, LIGHT_SKY, LIGHT_ORANGE, LIGHT_GREY,
+                LIGHT_GRASS]
 
 font = pygame.font.SysFont('sans', 40)
 font_small = pygame.font.SysFont('sans', 20)
@@ -55,6 +64,12 @@ error = 0
 points = []
 clusters = []
 labels = []
+# boundary
+points_bp = []
+for i in range(5, 490, 5):
+    for j in range(5, 690, 5):
+        points_bp.append([j, i])
+labels_bp = []
 
 while running:
     clock.tick(60)
@@ -65,7 +80,6 @@ while running:
     # Draw panel
     pygame.draw.rect(screen, BLACK, (50, 50, 700, 500))
     pygame.draw.rect(screen, BACKGROUND_PANEL, (55, 55, 690, 490))
-
     # K button +
     pygame.draw.rect(screen, BLACK, (850, 50, 50, 50))
     screen.blit(text_plus, (860, 50))
@@ -108,6 +122,7 @@ while running:
             # Create point on panel
             if 50 < mouse_x < 750 and 50 < mouse_y < 550:
                 labels = []
+                labels_bp = []
                 point = [mouse_x - 50, mouse_y - 50]
                 points.append(point)
                 print(points)
@@ -127,8 +142,8 @@ while running:
             # Run button
             if 850 < mouse_x < 1000 and 150 < mouse_y < 200:
                 labels = []
-
-                if clusters == []:
+                labels_bp = []
+                if not clusters != []:
                     continue
 
                 # Assign points to closet clusters
@@ -142,7 +157,15 @@ while running:
                     label = distances_to_cluster.index(min_distance)
                     labels.append(label)
 
-                # Update clusters
+                for p in points_bp:
+                    distances_to_cluster = []
+                    for c in clusters:
+                        dis = distance(p, c)
+                        distances_to_cluster.append(dis)
+
+                    min_distance = min(distances_to_cluster)
+                    label_bp = distances_to_cluster.index(min_distance)
+                    labels_bp.append(label_bp)
                 for i in range(K):
                     sum_x = 0
                     sum_y = 0
@@ -163,6 +186,7 @@ while running:
             # Random button
             if 850 < mouse_x < 1000 and 250 < mouse_y < 300:
                 labels = []
+                labels_bp = []
                 clusters = []
                 for i in range(K):
                     random_point = [randint(0, 700), randint(0, 500)]
@@ -176,31 +200,37 @@ while running:
                 points = []
                 clusters = []
                 labels = []
+                labels_bp = []
                 print("reset button pressed")
 
             # Algorithm
             if 850 < mouse_x < 1000 and 450 < mouse_y < 500:
                 try:
                     kmeans = KMeans(n_clusters=K).fit(points)
-                    labels = kmeans.predict(points)
+                    labels = kmeans.fit_predict(points)
+                    labels_bp = kmeans.predict(points_bp)
                     clusters = kmeans.cluster_centers_
                 except:
                     print("error")
                 print("Algorithm button pressed")
-
-    # Draw cluster
-    for i in range(len(clusters)):
-        pygame.draw.circle(screen, COLORS[i], (int(clusters[i][0]) + 50, int(clusters[i][1]) + 50), 10)
+    # Draw boundary
+    if not labels_bp != []:
+        pass
+    else:
+        for j in range(len(labels_bp)):
+            pygame.draw.rect(screen, LIGHT_COLORS[labels_bp[j]], (points_bp[j][0] + 50, points_bp[j][1] + 50, 5, 5))
 
     # Draw point
     for i in range(len(points)):
         pygame.draw.circle(screen, BLACK, (points[i][0] + 50, points[i][1] + 50), 6)
 
-        if labels == []:
+        if not labels != []:
             pygame.draw.circle(screen, WHITE, (points[i][0] + 50, points[i][1] + 50), 5)
         else:
             pygame.draw.circle(screen, COLORS[labels[i]], (points[i][0] + 50, points[i][1] + 50), 5)
-
+    # Draw cluster
+    for i in range(len(clusters)):
+        pygame.draw.circle(screen, COLORS[i], (int(clusters[i][0]) + 50, int(clusters[i][1]) + 50), 10)
     # Calculate and draw error
     error = 0
     if clusters != [] and labels != []:
@@ -213,3 +243,4 @@ while running:
     pygame.display.flip()
 
 pygame.quit()
+
