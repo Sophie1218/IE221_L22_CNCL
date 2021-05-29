@@ -1,8 +1,8 @@
 import pygame
 from pygame.locals import MOUSEBUTTONUP, QUIT
-import myprogram.interface as itf
-from myprogram.option1.interface_op1 import option1
-from myprogram.option2.interface_op2 import option2
+import interface as itf
+from option1.interface_op1 import option1
+from option2.interface_op2 import option2
 
 
 def menu():
