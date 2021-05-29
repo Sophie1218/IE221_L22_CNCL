@@ -1,5 +1,5 @@
-from myprogram.option1.point import Point, PointCluster
-import myprogram.interface as itf
+from option1.point import Point, PointCluster
+import interface as itf
 from random import randint
 import pygame
 from pygame.draw import rect
