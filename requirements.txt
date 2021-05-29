@@ -1,0 +1,4 @@
+must to do:
+1. install pygame
+2. matplotlib
+3. sklearn
