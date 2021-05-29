@@ -7,6 +7,7 @@ from pygame.display import set_mode, set_caption
 
 validChars = "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./"
 shiftChars = '~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?'
+
 # color variables
 BACKGROUND = (214, 214, 214)
 BLACK = (0, 0, 0)
@@ -37,6 +38,7 @@ COLORS = [RED, GREEN, BLUE, YELLOW, PINK, SKY, ORANGE, GRASS, GREY]
 LIGHT_COLORS = [LIGHT_RED, LIGHT_GREEN, LIGHT_BLUE, LIGHT_YELLOW, LIGHT_PINK, LIGHT_SKY, LIGHT_ORANGE, LIGHT_GREY,
                 LIGHT_GRASS]
 
+# class for button, text on screen
 
 class TextBox:
     def __init__(self, content, coordinates, color_text, color_rect):
@@ -144,7 +146,8 @@ class InputTextBox(TextBox):
         else:
             rect(screen, self.color_rect, self.rect, 2)
         screen.blit(self.text, (self.rect.x + 5, self.rect.y + 5))
-
+        
+# function screen
 
 def screen(x=1200, y=700):
     return set_mode((x, y))
