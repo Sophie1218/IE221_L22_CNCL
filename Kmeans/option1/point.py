@@ -1,7 +1,7 @@
 from math import sqrt
 from pygame.draw import circle
 from pygame.draw import rect
-from myprogram.interface import BLACK, WHITE, COLORS, LIGHT_COLORS
+from interface import BLACK, WHITE, COLORS, LIGHT_COLORS
 
 
 class Point:
