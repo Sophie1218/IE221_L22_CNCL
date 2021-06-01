@@ -1,5 +1,6 @@
-from option1.point import Point, PointCluster
-import interface as itf
+# import libraries
+from myprogram.option1.point import Point, PointCluster
+import myprogram.interface as itf
 from random import randint
 import pygame
 from pygame.draw import rect
@@ -8,6 +9,17 @@ from myprogram.model import kmeans
 
 
 def option1():
+    """
+    interface option 1
+
+            Parameters:
+
+
+            Returns:
+                    status of option 1: True/False
+                    True: option 1 is running
+                    False: option 1 is closed
+    """
     pygame.init()
 
     screen = itf.screen()
@@ -203,13 +215,16 @@ def option1():
 
         # Calculate and draw error
         error = 0
-        if clusters != [] and points_user != []:
-            for i in range(len(points_user)):
-                if None != points_user[i].return_label():
-                    error += points_user[i].distance(clusters[points_user[i].return_label()])
+        try:
+            if clusters != [] and points_user != []:
+                for i in range(len(points_user)):
+                    if None != points_user[i].return_label():
+                        error += points_user[i].distance(clusters[points_user[i].return_label()])
 
-        text_error = itf.TextBox("Error = " + str(int(error)), (850, 350), itf.BLACK, itf.BACKGROUND)
-        text_error.show(screen)
+            text_error = itf.TextBox("Error = " + str(int(error)), (850, 350), itf.BLACK, itf.BACKGROUND)
+            text_error.show(screen)
+        except:
+            print('')
         pygame.display.flip()
 
     pygame.quit()
