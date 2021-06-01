@@ -1,11 +1,16 @@
+# import libraries
 import pygame
 from pygame.locals import MOUSEBUTTONUP, QUIT
-import interface as itf
-from option1.interface_op1 import option1
-from option2.interface_op2 import option2
+import myprogram.interface as itf
+from myprogram.option1.interface_op1 import option1
+from myprogram.option2.interface_op2 import option2
 
 
 def menu():
+    """
+    interface menu
+
+    """
     pygame.init()
 
     screen = itf.screen()
@@ -13,6 +18,7 @@ def menu():
     running = True
     clock = pygame.time.Clock()
 
+    # button and title are instances of class TextBox from interface module
     title = itf.TextBox('K - means Visualization', (280, 118), itf.BLUE, itf.BACKGROUND)
     title.update_font_size(83)
     op1 = itf.TextBox('Option 1', (520, 300), itf.BLACK, itf.LIGHT_BLUE)
@@ -41,6 +47,7 @@ def menu():
                     pygame.event.post(pygame.event.Event(QUIT))
                     print('exit')
 
+        # visualize title and button
         title.show(screen)
         op1.show(screen)
         op2.show(screen)
