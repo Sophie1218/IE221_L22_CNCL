@@ -1,6 +1,3 @@
-# def create_text_render(string):
-#     font = pygame.font.SysFont('sans', 40)
-#     return font.render(string, True, WHITE)
 import pygame
 from random import randint
 import math
