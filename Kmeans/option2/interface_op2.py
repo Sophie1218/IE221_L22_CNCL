@@ -1,3 +1,4 @@
+# import libraries
 import myprogram.interface as itf
 from myprogram.model import kmeans
 import pygame
@@ -7,6 +8,17 @@ import numpy as np
 
 
 def option2():
+    """
+    interface option 2
+
+            Parameters:
+
+
+            Returns:
+                    status of option 2: True/False
+                    True: option 2 is running
+                    False: option 2 is closed
+    """
     pygame.init()
     screen = itf.screen()
 
@@ -58,9 +70,10 @@ def option2():
                         image.update_path(input_box.return_content())
                 print('Show button pressed')
 
-                # Press run button
+                # Press run button and show image after running K - means
                 if run.is_click(event.pos):
                     if K > 0 and None != image.return_path():
+
                         img = image.process_image()
                         model = kmeans(n_clusters=K).fit(img)
                         labels = model.predict(img)
@@ -72,7 +85,6 @@ def option2():
                             img2[i] = clusters[labels[i]]
 
                         img2 = img2.reshape(image.return_size()[0], image.return_size()[1], 3)
-
                         plt.imshow(img2)
                         plt.show()
 
