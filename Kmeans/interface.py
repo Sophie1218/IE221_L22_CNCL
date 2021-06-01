@@ -1,3 +1,4 @@
+# import libraries
 from pygame.font import Font
 from pygame import Rect
 from pygame.display import set_mode as s
@@ -7,7 +8,6 @@ from pygame.display import set_mode, set_caption
 
 validChars = "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./"
 shiftChars = '~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?'
-
 # color variables
 BACKGROUND = (214, 214, 214)
 BLACK = (0, 0, 0)
@@ -38,9 +38,47 @@ COLORS = [RED, GREEN, BLUE, YELLOW, PINK, SKY, ORANGE, GRASS, GREY]
 LIGHT_COLORS = [LIGHT_RED, LIGHT_GREEN, LIGHT_BLUE, LIGHT_YELLOW, LIGHT_PINK, LIGHT_SKY, LIGHT_ORANGE, LIGHT_GREY,
                 LIGHT_GRASS]
 
-# class for button, text on screen
 
 class TextBox:
+    """
+     A class to represent interface of button, title, text on screen.
+
+     ...
+
+     Attributes
+     ----------
+     content : string
+         content of text
+     coordinates : tuple/list with 2 dimension
+         coordinates[0] x
+         coordinates[0] y
+     color_text : color variables above
+         color of text
+    color_rect: color variables above
+         color of rectangle
+     Methods
+     -------
+    update_text(self):
+    update_width_rect(self):
+    update_font_text(self):
+    update_font_size(self):
+    update_coordinates(self):
+    update_color_text(self):
+    update_color_rect(self):
+        update-functions
+    delete():
+        delete textbox
+    show(screen):
+        draw textbox on screen
+    is_click(self, event):
+        if textbox is button, check is is clicked?
+    get_text_width(self):
+        return width of textbox
+    return_content(self):
+        return content of textbox
+
+     """
+
     def __init__(self, content, coordinates, color_text, color_rect):
         self.content = content
         self.font_text = None
@@ -107,11 +145,60 @@ class TextBox:
     def return_content(self):
         return self.content
 
-    def return_content(self):
-        return self.content
-
 
 class InputTextBox(TextBox):
+    """
+     A derived class of class TextBox, represent input box
+
+     ...
+
+     Attributes
+     ----------
+    content : string
+         content of text
+    coordinates : tuple/list with 2 dimension
+         coordinates[0] x
+         coordinates[0] y
+    color_text : color variables above
+         color of text
+    color_rect: color variables above
+         color of rectangle
+    active: boolean
+        InputTextBox is clicked?
+    color_active: variable color
+        color of rect after is clicked
+     Methods
+     -------
+    update_text(self):
+    update_width_rect(self):
+    update_font_text(self):
+    update_font_size(self):
+    update_coordinates(self):
+    update_color_text(self):
+    update_color_rect(self):
+        update-functions
+    delete():
+        delete textbox
+    show(screen):
+        draw textbox on screen
+    is_click(self, event):
+        if textbox is button, check is is clicked?
+    get_text_width(self):
+        return width of textbox
+    return_content(self):
+        return content of textbox
+    is_click(event):
+    update_active(temp):
+    is_active():
+        this functions supports event "InputTextBox is clicked"
+    minus_chr(self):
+        content return [:-1]
+        content delete the last letter of content from the keyboard down event
+    add_chr(self, char, shiftDown):
+        add one letter into the last position of content from the keyboard down event
+    show(self, screen):
+        draw input box on the screen
+     """
     active = False
     color_active = Color('lightskyblue3')
 
@@ -130,10 +217,24 @@ class InputTextBox(TextBox):
         return self.active
 
     def minus_chr(self):
+        """
+        Backspace from keyboard
+        Parameter:
+        Returns:
+            update_text
+        """
         self.content = self.content[:-1]
         self.update_text(self.content)
 
     def add_chr(self, char, shiftDown):
+        """
+        Insert from keyboard
+        Parameter:
+            char: string, only one symbol or one letter from keyboard
+            shiftDown: boolean, Shift button on keyboard is pressed ? True: yes and False: no
+        Returns:
+            update_text
+        """
         if char in validChars and not shiftDown:
             self.content += char
         elif char in validChars and shiftDown:
@@ -146,13 +247,13 @@ class InputTextBox(TextBox):
         else:
             rect(screen, self.color_rect, self.rect, 2)
         screen.blit(self.text, (self.rect.x + 5, self.rect.y + 5))
-        
-# function screen
 
+
+# size of 3 screen of program
 def screen(x=1200, y=700):
     return set_mode((x, y))
 
 
+# caption of screen
 def caption(name='K - means Visualization'):
     set_caption(name)
-
