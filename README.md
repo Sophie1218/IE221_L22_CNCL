@@ -1,2 +1,3 @@
-# IE221_L22_CNCL Folder project - Kmeans
-K_means
+# IE221_L22_CNCL: K_means
+Folder project: Kmeans
+
