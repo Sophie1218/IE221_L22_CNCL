@@ -1,8 +1,11 @@
-# import library
-from myprogram.menu.interface_menu import menu
+# import libraries
+from sklearn.cluster import KMeans
 
-# Run program
 try:
-    menu()
+    class kmeans(KMeans):
+        """
+        A derived class of class KMeans in sklearn.cluster module
+         """
+        pass
 except:
-    print('error')
+    print('K - means not installed yet')
