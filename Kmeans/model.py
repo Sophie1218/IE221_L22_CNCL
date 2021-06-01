@@ -1,7 +1,8 @@
-from sklearn.cluster import KMeans
+# import library
+from myprogram.menu.interface_menu import menu
 
+# Run program
 try:
-    class kmeans(KMeans):
-        pass
+    menu()
 except:
-    print('K - means not installed yet')
+    print('error')
