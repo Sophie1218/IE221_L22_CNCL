@@ -1,4 +1,4 @@
 must to do:
-1. install pygame
-2. matplotlib
-3. sklearn
+1. pip install pygame
+2. pip install matplotlib
+3. pip install -U scikit-learn
