@@ -160,9 +160,9 @@ def option1():
                 # Reset button
                 if reset.is_click(event.pos):
                     K = 0
+                    K_text.update_text('K = ' + str(K))
                     error = 0
                     points_user = []
-                    points_bp = []
                     clusters = []
 
                     print('reset button pressed')
@@ -224,7 +224,7 @@ def option1():
             text_error = itf.TextBox("Error = " + str(int(error)), (850, 350), itf.BLACK, itf.BACKGROUND)
             text_error.show(screen)
         except:
-            print('')
+            print('error')
         pygame.display.flip()
 
     pygame.quit()
