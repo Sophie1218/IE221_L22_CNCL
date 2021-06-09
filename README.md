@@ -5,7 +5,7 @@ Source code has module, package, class structure; docstring; handling exception.
 ### How to run:
 run file main.py 
 
-### Link Demo trực tiếp: 
+### Link Demo: 
 https://drive.google.com/file/d/1UxeosVIpPhf_t4M-oAMJBGdJuVVDDcqB/view?usp=sharing
 
 ### Small blog:
